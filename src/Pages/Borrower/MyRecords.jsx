@@ -11,7 +11,7 @@ function UserBorrowRecords() {
     const fetchBorrowRecords = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/borrowRecords/${userId}`,
+          `https://library-mgmt-system-1.onrender.com/api/borrowRecords/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -32,7 +32,7 @@ function UserBorrowRecords() {
     const bookId = record.bookId?._id || record.bookId;
     try {
       const res = await axios.post(
-        `http://localhost:3000/api/return`,
+        `https://library-mgmt-system-1.onrender.com/api/return`,
         { userId, bookId },
         {
           headers: {

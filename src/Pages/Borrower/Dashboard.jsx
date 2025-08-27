@@ -44,14 +44,14 @@ function BorrowerDashboard() {
       setStatsError(null);
 
       // Fetch total books
-      const res = await axios.get("http://localhost:3000/api/books", {
+      const res = await axios.get("https://library-mgmt-system-1.onrender.com/api/books", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
       // Fetch borrow records
-      const res1 = await axios.get(`http://localhost:3000/api/borrowRecords/${userId}`, {
+      const res1 = await axios.get(`https://library-mgmt-system-1.onrender.com/api/borrowRecords/${userId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

@@ -17,7 +17,7 @@ function BooksPage() {
   const fetchBooks = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/api/books", {
+      const response = await axios.get("https://library-mgmt-system-1.onrender.com/api/books", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -42,7 +42,7 @@ function BooksPage() {
 
   const handleDelete = async (bookId) => {
     try {
-      await axios.delete(`http://localhost:3000/api/books/${bookId}`, {
+      await axios.delete(`https://library-mgmt-system-1.onrender.com/api/books/${bookId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -60,7 +60,7 @@ function BooksPage() {
   const handleBorrow = async (bookId) => {
     try {
       await axios.post(
-        "http://localhost:3000/api/borrow",
+        "https://library-mgmt-system-1.onrender.com/api/borrow",
         { bookId },
         {
           headers: {

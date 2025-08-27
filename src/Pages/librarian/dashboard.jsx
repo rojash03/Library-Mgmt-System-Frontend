@@ -18,7 +18,7 @@ function LibrarianDashboard() {
   const fetchBorrows = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:3000/api/borrowRecords", {
+      const res = await axios.get("https://library-mgmt-system-1.onrender.com/api/borrowRecords", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -37,14 +37,14 @@ function LibrarianDashboard() {
       setStatsError(null);
 
       // Fetch total books
-      const res = await axios.get("http://localhost:3000/api/books", {
+      const res = await axios.get("https://library-mgmt-system-1.onrender.com/api/books", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
       // Fetch borrow records
-      const res1 = await axios.get("http://localhost:3000/api/borrowRecords", {
+      const res1 = await axios.get("https://library-mgmt-system-1.onrender.com/api/borrowRecords", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
