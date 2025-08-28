@@ -1,6 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 export function LogoutButton() {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ export function LogoutButton() {
         localStorage.removeItem("user");
         // Navigate to login
         navigate("/");
+        toast.success("Logged out successfully");
     };
     return (
         <button

@@ -4,7 +4,7 @@ import axios from "axios";
 import EditBookForm from "./EditBookForm";
 import { useAuth } from "../Context/authContext";
 
-const BookList = ({userRole}) => {
+const BookList = ({ userRole }) => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [editBook, setEditBook] = useState(null);
@@ -13,11 +13,14 @@ const BookList = ({userRole}) => {
   const fetchBooks = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/api/books", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await axios.get(
+        "https://library-mgmt-system-1.onrender.com/api/books",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
       if (response.status === 200) {
         setBooks(Array.isArray(response.data.books) ? response.data.books : []);
@@ -36,14 +39,16 @@ const BookList = ({userRole}) => {
     fetchBooks();
   }, []);
 
-  
   const handleDelete = async (bookId) => {
     try {
-      await axios.delete(`http://localhost:3000/api/books/${bookId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await axios.delete(
+        `https://library-mgmt-system-1.onrender.com/api/books/${bookId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       toast.success("Book deleted successfully");
       fetchBooks();
     } catch (error) {
@@ -56,7 +61,7 @@ const BookList = ({userRole}) => {
   const handleBorrow = async (bookId) => {
     try {
       await axios.post(
-        "http://localhost:3000/api/borrow",
+        "https://library-mgmt-system-1.onrender.com/api/borrow",
         { bookId },
         {
           headers: {
@@ -77,7 +82,6 @@ const BookList = ({userRole}) => {
   return (
     <>
       <div className="mt-4">
-
         {loading ? (
           <p>Loading...</p>
         ) : (
@@ -93,41 +97,41 @@ const BookList = ({userRole}) => {
                 </tr>
               </thead>
               <tbody>
-  {books.map((book) => (
-    <tr key={book._id} className="hover:bg-gray-50">
-      <td className=" px-4 py-2 text-center">{book.title}</td>
-      <td className=" px-4 py-2 text-center">{book.author}</td>
-      <td className=" px-4 py-2 text-center">{book.isbn}</td>
-      <td className=" px-4 py-2 text-center">{book.available}</td>
-      <td className=" px-4 py-2 text-center space-x-2">
-        {user?.role === "librarian" && (
-          <>
-            <button
-              className="bg-blue-500 text-white px-3 py-1 rounded text-sm"
-              onClick={() => setEditBook(book)}
-            >
-              Edit
-            </button>
-            <button
-              className="bg-red-500 text-white px-3 py-1 rounded text-sm"
-              onClick={() => handleDelete(book._id)}
-            >
-              Delete
-            </button>
-          </>
-        )}
-        {user?.role === "borrower" && (
-          <button
-            className="bg-green-500 text-white px-3 py-1 rounded text-sm"
-            onClick={() => handleBorrow(book._id)}
-          >
-            Borrow
-          </button>
-        )}
-      </td>
-    </tr>
-  ))}
-</tbody>
+                {books.map((book) => (
+                  <tr key={book._id} className="hover:bg-gray-50">
+                    <td className=" px-4 py-2 text-center">{book.title}</td>
+                    <td className=" px-4 py-2 text-center">{book.author}</td>
+                    <td className=" px-4 py-2 text-center">{book.isbn}</td>
+                    <td className=" px-4 py-2 text-center">{book.available}</td>
+                    <td className=" px-4 py-2 text-center space-x-2">
+                      {user?.role === "librarian" && (
+                        <>
+                          <button
+                            className="bg-blue-500 text-white px-3 py-1 rounded text-sm"
+                            onClick={() => setEditBook(book)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="bg-red-500 text-white px-3 py-1 rounded text-sm"
+                            onClick={() => handleDelete(book._id)}
+                          >
+                            Delete
+                          </button>
+                        </>
+                      )}
+                      {user?.role === "borrower" && (
+                        <button
+                          className="bg-green-500 text-white px-3 py-1 rounded text-sm"
+                          onClick={() => handleBorrow(book._id)}
+                        >
+                          Borrow
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         )}

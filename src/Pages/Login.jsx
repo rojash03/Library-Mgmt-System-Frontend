@@ -5,7 +5,6 @@ import api from "../Config/config";
 import { toast } from "react-toastify";
 import { useAuth } from "../Context/authContext";
 import {useLocation} from "react-router-dom";
-
 function Login() {
   
   const [name, setName] = useState("");

@@ -66,7 +66,7 @@ function EditBookForm({ book, onClose, fetchBooks }) {
     setLoading(true);
     try {
       await axios.put(
-        `http://localhost:3000/api/books/${book._id}`,
+        `https://library-mgmt-system-1.onrender.com/api/books/${book._id}`,
         {
           title: formData.title.trim(),
           author: formData.author.trim(),

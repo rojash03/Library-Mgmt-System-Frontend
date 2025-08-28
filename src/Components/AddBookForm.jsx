@@ -23,7 +23,7 @@ function AddBookForm({ modelForm, fetchBooks }) {
     try {
       console.log("Sending data to backend:", formData);
       const result = await axios.post(
-        "http://localhost:3000/api/books",
+        "https://library-mgmt-system-1.onrender.com/api/books",
         {
           ...formData,
           quantity: Number(formData.quantity),
@@ -39,7 +39,7 @@ function AddBookForm({ modelForm, fetchBooks }) {
       toast.success("Book added successfully!");
       fetchBooks();
       modelForm(false);
-      navigate("/books");
+      navigate("/dashboard/books");
     } catch (error) {
       console.error(
         "Error adding book:",
@@ -142,7 +142,7 @@ function AddBookForm({ modelForm, fetchBooks }) {
         </button>
         <button
         type="button"
-        onClick={() => navigate("/dashboard")}
+        onClick={() => navigate("/dashboard/books")}
         className="px-5 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition"
         >
         Cancel

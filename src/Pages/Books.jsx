@@ -4,6 +4,7 @@ import Sidebar from "../Components/Librarian/Sidebar";
 import EditBookForm from "../Components/EditBookForm";
 import { useAuth } from "../Context/authContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function BooksPage() {
   const [books, setBooks] = useState([]);
@@ -47,10 +48,10 @@ function BooksPage() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      alert("Book deleted successfully");
+      toast.success("Book deleted successfully");
       fetchBooks();
     } catch (error) {
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to delete the book. Please try again."
       );
