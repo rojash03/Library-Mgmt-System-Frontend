@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -64,30 +65,32 @@ function EditBookForm({ book, onClose, fetchBooks }) {
 
     setLoading(true);
     try {
-  await axios.put(
-    `http://localhost:3000/api/books/${book._id}`,
-    {
-      title: formData.title.trim(),
-      author: formData.author.trim(),
-      isbn: formData.isbn.trim(),
-      quantity: Number(formData.quantity),
-      available: Number(formData.available),
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
+      await axios.put(
+        `http://localhost:3000/api/books/${book._id}`,
+        {
+          title: formData.title.trim(),
+          author: formData.author.trim(),
+          isbn: formData.isbn.trim(),
+          quantity: Number(formData.quantity),
+          available: Number(formData.available),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      fetchBooks();
+      toast.success("Book updated successfully!");
+      onClose();
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "Failed to update book. Please try again."
+      );
+      toast.error(err.response?.data?.message || "Failed to update book. Please try again.");
+    } finally {
+      setLoading(false);
     }
-  );
-  fetchBooks();
-  onClose();
-} catch (err) {
-  setError(
-    err.response?.data?.message || "Failed to update book. Please try again."
-  );
-} finally {
-setLoading(false);
-}
   }
 
 if (!book) return null;

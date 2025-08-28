@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 
 import axios from "axios";
 import { useState } from "react";
@@ -19,7 +20,6 @@ function AddBookForm({ modelForm, fetchBooks }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       console.log("Sending data to backend:", formData);
       const result = await axios.post(
@@ -32,11 +32,11 @@ function AddBookForm({ modelForm, fetchBooks }) {
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-            
           },
         }
       );
       console.log("Book added:", result.data);
+      toast.success("Book added successfully!");
       fetchBooks();
       modelForm(false);
       navigate("/books");
@@ -45,6 +45,7 @@ function AddBookForm({ modelForm, fetchBooks }) {
         "Error adding book:",
         error.response?.data || error.message
       );
+      toast.error(error.response?.data?.message || "Failed to add book. Please try again.");
     }
   };
 

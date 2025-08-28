@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import Sidebar from "../../Components/Librarian/Sidebar";
 import BookList from "../../Components/BookList";
 import axios from "axios";
@@ -33,6 +34,7 @@ function BorrowerDashboard() {
       setBorrows(res.data.borrowRecords || []);
     } catch (err) {
       console.error("Failed to fetch borrow records:", err);
+      toast.error("Failed to fetch borrow records");
     } finally {
       setLoading(false);
     }
@@ -85,6 +87,7 @@ function BorrowerDashboard() {
         availableBooks: 0,
         totalBorrowers: 0,
       });
+      toast.error("Failed to fetch dashboard stats");
     } finally {
       setStatsLoading(false);
     }

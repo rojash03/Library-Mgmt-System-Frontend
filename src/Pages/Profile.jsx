@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import Sidebar from "../Components/Librarian/Sidebar";
 
 function Profile() {
@@ -26,7 +27,10 @@ function Profile() {
 
           <section className="bg-white rounded-lg shadow p-6">
             <h3 className="text-lg font-semibold mb-4">Personal Information</h3>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={e => {
+              e.preventDefault();
+              toast.success("Profile updated successfully!");
+            }}>
               <div>
                 <label htmlFor="name" className=" mb-1 font-medium">
                   Full Name

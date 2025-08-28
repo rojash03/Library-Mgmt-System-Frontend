@@ -1,3 +1,5 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Route } from "react-router-dom";
 import { BrowserRouter, Routes } from "react-router-dom";
 import Login from "./Pages/Login";
@@ -10,6 +12,7 @@ import ProfilePage from "./Pages/Profile";
 import AddBooks from "./Pages/librarian/AddBooks";
 import UserBorrowRecords from "./Pages/Borrower/MyRecords";
 import AboutUs from "./Pages/AboutUs";
+import ProtectedRoute from "./Utills/protectedRoute";
 
 function App () {
   const DashboardRouter = () => {
@@ -24,14 +27,33 @@ function App () {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<DashboardRouter />} />
-          <Route path="/dashboard/addbooks" element={<AddBooks />} />
-          <Route path="/dashboard/books" element={<AvailableBooks />} />
-          <Route path="/dashboard/profile" element={<ProfilePage />} />
-          <Route path="/dashboard/my-records" element={<UserBorrowRecords/>} />
-          <Route path="/dashboard/about-us" element={<AboutUs />} />
-
+          <Route
+            path="/dashboard/*"
+            element={
+              <ProtectedRoute>
+                <Routes>
+                  <Route path="" element={<DashboardRouter />} />
+                  <Route path="addbooks" element={<AddBooks />} />
+                  <Route path="books" element={<AvailableBooks />} />
+                  <Route path="profile" element={<ProfilePage />} />
+                  <Route path="my-records" element={<UserBorrowRecords />} />
+                  <Route path="about-us" element={<AboutUs />} />
+                </Routes>
+              </ProtectedRoute>
+            }
+          />
         </Routes>
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </BrowserRouter>
     </AuthProvider>
   );
