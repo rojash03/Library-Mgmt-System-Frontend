@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import Sidebar from "../../Components/Librarian/Sidebar";
 import BookList from "../../Components/BookList";
 import axios from "axios";
@@ -24,7 +23,7 @@ function BorrowerDashboard() {
     try {
       setLoading(true);
       const res = await axios.get(
-        `https://library-mgmt-system-1.onrender.com/borrowRecords/${userId}`,
+        `http://localhost:3000/api/borrowRecords/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -34,7 +33,6 @@ function BorrowerDashboard() {
       setBorrows(res.data.borrowRecords || []);
     } catch (err) {
       console.error("Failed to fetch borrow records:", err);
-      toast.error("Failed to fetch borrow records");
     } finally {
       setLoading(false);
     }
@@ -87,7 +85,6 @@ function BorrowerDashboard() {
         availableBooks: 0,
         totalBorrowers: 0,
       });
-      toast.error("Failed to fetch dashboard stats");
     } finally {
       setStatsLoading(false);
     }
@@ -95,7 +92,7 @@ function BorrowerDashboard() {
 
   useEffect(() => {
     fetchBorrows();
-    fetchStats();ZZZ
+    fetchStats();
   }, []);
 
   return (

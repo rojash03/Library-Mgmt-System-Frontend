@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
@@ -9,7 +8,6 @@ export function LogoutButton() {
         // Clear any stored data
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        toast.success("Logged out successfully!");
         // Navigate to login
         navigate("/");
     };

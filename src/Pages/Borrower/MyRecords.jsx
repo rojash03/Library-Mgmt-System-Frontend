@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "../../Components/Librarian/Sidebar";
@@ -51,10 +50,10 @@ function UserBorrowRecords() {
         )
       );
 
-      toast.success(res.data.message || "Book returned successfully!");
+      alert(res.data.message || "Book returned successfully!");
     } catch (err) {
       console.error("Error returning book:", err);
-      toast.error("Error returning book.");
+      alert("Error returning book.");
     }
   };
 

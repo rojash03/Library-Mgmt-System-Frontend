@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "../Components/Librarian/Sidebar";
@@ -48,10 +47,10 @@ function BooksPage() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      toast.success("Book deleted successfully");
+      alert("Book deleted successfully");
       fetchBooks();
     } catch (error) {
-      toast.error(
+      alert(
         error.response?.data?.message ||
           "Failed to delete the book. Please try again."
       );
@@ -69,10 +68,10 @@ function BooksPage() {
           },
         }
       );
-      toast.success("Book borrowed successfully");
+      alert("Book borrowed successfully");
       fetchBooks();
     } catch (error) {
-      toast.error(
+      alert(
         error.response?.data?.message ||
           "Failed to borrow the book. Please try again."
       );
