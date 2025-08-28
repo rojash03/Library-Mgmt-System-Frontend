@@ -24,7 +24,7 @@ function BorrowerDashboard() {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:3000/api/borrowRecords/${userId}`,
+        `https://library-mgmt-system-1.onrender.com/borrowRecords/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -95,7 +95,7 @@ function BorrowerDashboard() {
 
   useEffect(() => {
     fetchBorrows();
-    fetchStats();
+    fetchStats();ZZZ
   }, []);
 
   return (
