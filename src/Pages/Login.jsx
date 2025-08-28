@@ -80,16 +80,11 @@ function Login() {
         }
       }
     } catch (error) {
-      let msg = "Error, try again";
-      if (error.response) {
-        if (error.response.status === 409) {
-          msg = error.response.data?.message || "User exists";
-        } else if (error.response.status === 401 || error.response.status === 400) {
-          msg = error.response.data?.message || "Incorrect email or password.";
-        } else {
-          msg = error.response.data?.message || "Error, try again";
-        }
-      }
+      const msg =
+        error.response?.status === 409
+          ? error.response.data?.message || "User exists"
+          : error.response?.data?.message || "Error, try again";
+
       toast.error(msg);
     } finally {
       setLoading(false);
